@@ -6,6 +6,7 @@ const cluster = "projet-6.ps6br.mongodb.net";
 const uri = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&w=majority`;
 
 const booksRoutes = require("./routes/books");
+const userRoutes = require('./routes/user');
 
 mongoose.connect(uri);
 
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
   });
 
 app.use("/api/books", booksRoutes);
+app.use("/api/auth", userRoutes);
 
  module.exports = app;
  
