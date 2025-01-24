@@ -5,8 +5,8 @@ const password = encodeURIComponent("R@S9m95NU-Uk-sG");
 const cluster = "projet-6.ps6br.mongodb.net";
 const uri = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&w=majority`;
 
-const booksRoutes = require("./routes/books");
-const userRoutes = require('./routes/user');
+const booksRoutes = require("./routes/routeBooks");
+const userRoutes = require('./routes/routeUser');
 
 mongoose.connect(uri);
 
