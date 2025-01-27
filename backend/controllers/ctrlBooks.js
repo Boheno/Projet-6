@@ -7,9 +7,13 @@ exports.getAllBooks = (req, res, next) => {
   };
 
   exports.createBooks = (req, res, next) => {
-    delete req.body._id;
+    const booksObject = JSON.parse(req.body.books);
+    delete booksObject._id;
+    delete booksObject._userId;
     const books = new Books({
-      ...req.body
+      ...booksObject,
+      userId: req.auth.userId,
+      imageUrl:`${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
     books.save()
     .then(() => res.status(201).json ({message: "Livre enregistré"}))
@@ -28,7 +32,7 @@ exports.getAllBooks = (req, res, next) => {
       .catch(error => res.status(400).json({ error }));
   };
 
-  exports.deletBooks = (req, res, next) => {
+  exports.deleteBooks = (req, res, next) => {
     Books.deleteOne({ _id: req.params.id })
       .then(() => res.status(200).json({ message: 'Livre supprimé !'}))
       .catch(error => res.status(400).json({ error }));
