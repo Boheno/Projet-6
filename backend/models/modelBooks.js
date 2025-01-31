@@ -6,7 +6,7 @@ const ratingSchema = mongoose.Schema({
   });
 
 const bookSchema = new mongoose.Schema({
-    //_id: {type: String, required: true},
+    userId: {type: String, required: true},
     title: {type: String, required: true},
     author: {type: String, required: true},
     imageUrl: {type: String, required: false},

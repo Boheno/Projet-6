@@ -8,6 +8,7 @@ const path = require('path');
 
 const booksRoutes = require("./routes/routeBooks");
 const userRoutes = require('./routes/routeUser');
+const RatingRoutes = require ('./routes/routeRating');
 
 mongoose.connect(uri);
 
@@ -25,6 +26,8 @@ app.use((req, res, next) => {
 app.use("/api/books", booksRoutes);
 app.use("/api/auth", userRoutes);
 app.use("/images", express.static(path.join(__dirname, "images")));
+app.use("/api/books/bestrating", RatingRoutes);
+app.use("/api/books/:id/rating", RatingRoutes);
 
  module.exports = app;
  
