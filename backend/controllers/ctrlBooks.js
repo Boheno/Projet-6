@@ -36,7 +36,7 @@ exports.getAllBooks = (req, res, next) => {
       delete booksObject._userId;
       Books.findOne({_id: req.params.id})
           .then((book) => {
-              if (book.userId != req.auth.userId) {
+              if (book.userId !== req.auth.userId) {
                   res.status(401).json({ message : 'Not authorized'});
               } else {
                   Books.updateOne({ _id: req.params.id}, { ...booksObject, _id: req.params.id})
@@ -52,7 +52,7 @@ exports.getAllBooks = (req, res, next) => {
   exports.deleteBooks = (req, res, next) => {
       Books.findOne({ _id: req.params.id})
           .then(book => {
-              if (book.userId != req.auth.userId) {
+              if (book.userId !== req.auth.userId) {
                   res.status(401).json({message: 'Not authorized'});
               } else {
                   const filename = book.imageUrl.split('/images/')[1];

@@ -20,14 +20,19 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+
+    if (req.method === "OPTIONS") {
+      return res.sendStatus(204); // Répond avec "No Content"
+  }
+
     next();
   });
 
 app.use("/api/books", booksRoutes);
 app.use("/api/auth", userRoutes);
 app.use("/images", express.static(path.join(__dirname, "images")));
-app.use("/api/books/bestrating", RatingRoutes);
-app.use("/api/books/:id/rating", RatingRoutes);
+//app.use("/api/books/bestrating", RatingRoutes);
+app.use("/api/books", RatingRoutes);
 
  module.exports = app;
  
