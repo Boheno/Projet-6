@@ -1,7 +1,6 @@
 const multer = require('multer');
 const sharp = require('sharp');
 const path = require('path');
-const fs = require('fs');
 
 const MIME_TYPES = {
   'image/jpg': 'jpg',
@@ -34,9 +33,9 @@ const processImage = (req, res, next) => {
   const outputPath = path.join(__dirname, '../images/', filename);
 
   sharp(req.file.buffer)
-    .resize(206, 260, { fit: 'fill' })
+    .resize(206, 260, { fit: 'fill' }, {withoutEnlargement: true})
     .toFormat('webp')
-    .webp({ quality: 80 })
+    .webp({ quality: req.file.size > 2000000 ? 70 : 80 })
     .toFile(outputPath)
     .then(() => {
       req.file.filename = filename;
