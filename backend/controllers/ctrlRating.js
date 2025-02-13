@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Books = require("../models/modelBooks");
 
 /**
@@ -31,7 +32,7 @@ exports.getBestRatedBooks = (req, res, next) => {
     .limit(3)
     .then(books => {
       res.status(200).json(books)
-})
+    })
     .catch(error => {
       res.status(400).json({error})}
     );

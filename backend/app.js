@@ -23,15 +23,14 @@ app.use((req, res, next) => {
 
     if (req.method === "OPTIONS") {
       return res.sendStatus(204);
-  }
-
+    }
     next();
-  });
+});
 
 app.use("/api/books", ratingRoutes);
 app.use("/api/books", booksRoutes);
 app.use("/api/auth", userRoutes);
 app.use("/images", express.static(path.join(__dirname, "images")));
 
- module.exports = app;
+module.exports = app;
  
